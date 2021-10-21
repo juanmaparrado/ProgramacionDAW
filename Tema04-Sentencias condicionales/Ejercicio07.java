@@ -11,7 +11,7 @@ public class Ejercicio07 {
    double notaB = s.nextDouble ();
    System.out.print("Introduce la tercera nota (sobre 10): ");
    double notaC = s.nextDouble ();
-   
+   s.close();
    double media = (notaA + notaB + notaC)/3;
    
    if ((media > 10) || (media < 0)) {

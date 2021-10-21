@@ -10,6 +10,7 @@ public class Ejercicio06 {
    
    double tiempo;
    tiempo = (Math.sqrt((2 * altura)/9.81));
+   s.close();
    
    System.out.println("El objeto tardara en caer: " + tiempo + "segundos al suelo");
     

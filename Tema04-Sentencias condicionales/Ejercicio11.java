@@ -9,7 +9,7 @@ public class Ejercicio11 {
    int hora = s.nextInt ();
    System.out.print("Introduce los minutos: ");
    int minutos = s.nextInt ();
-   
+   s.close();
    int tiempoResMin, tiempoResHora;
 
    tiempoResMin = 60 - minutos;

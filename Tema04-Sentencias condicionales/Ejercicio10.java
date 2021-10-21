@@ -9,7 +9,7 @@ public class Ejercicio10 {
    String mes = s.nextLine ();
    System.out.print("Introduce el dia que naciste: ");
    int dia = s.nextInt ();
-   
+   s.close();
    int fecha = 0;
    String horoscopo;
    

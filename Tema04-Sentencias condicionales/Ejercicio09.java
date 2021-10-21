@@ -11,7 +11,7 @@ public class Ejercicio09 {
    double varB = s.nextDouble ();
    System.out.print("Introduce un valor para la variable c: ");
    double varC = s.nextDouble ();
-   
+   s.close();
    double valorX1, valorX2;
    valorX1 = (-(varB) + Math.sqrt(((Math.pow(varB, 2)) - (4 * varA * varC))))/(2 * varA);
    valorX2 = (-(varB) - Math.sqrt(((Math.pow(varB, 2)) - (4 * varA * varC))))/(2 * varA);

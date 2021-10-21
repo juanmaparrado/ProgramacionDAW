@@ -15,6 +15,7 @@ public class Ejercicio08 {
    double media = (notaA + notaB + notaC)/3;
    String notaPalabra;
    int notaM = 0;
+   s.close();
    
    if (media >= 0) {
      if (media < 5) {

@@ -11,7 +11,6 @@ public class Ej10 {
             notaUsuario=Float.parseFloat(System.console().readLine());
             notas += notaUsuario; 
         }
-           
         System.out.println("La media es "+(notas/ndigitos));
             
             

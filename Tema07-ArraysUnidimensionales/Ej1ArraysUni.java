@@ -12,7 +12,7 @@ public class Ej1ArraysUni {
 
     for (int i = 0; i < 12; i++) {
         System.out.println(" indice  "+i);
-        System.out.println(" valor "+num[i]);
+        System.out.print(" valor "+num[i]);
 
         }
     }

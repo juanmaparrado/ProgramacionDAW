@@ -1,4 +1,4 @@
-public class Ej1Arrays {
+public class Ej1ArraysUni {
  public static void main(String[] args) {
     int [] num ;
     num = new int[12];

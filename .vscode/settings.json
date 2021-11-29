@@ -1,6 +1,5 @@
 {
     "java.project.sourcePaths": [
-        "Tema04-Sentencias condicionales",
-        "Tema05-Bucles"
+        "."
     ]
 }

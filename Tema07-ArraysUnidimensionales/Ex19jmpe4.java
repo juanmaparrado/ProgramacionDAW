@@ -6,50 +6,44 @@ public class Ex19jmpe4 {
         Scanner s = new Scanner(System.in);
         int ancho ;
         int alto ;
-        char c = '*';
-        final int h = 4;
+        char caracter = '*';
+        int numasteriscos = 1;
         int numespacios = 3;
-        char triangulo [] [] = new char [4][4];
          
-        
         //entrada de datos
         System.out.println("Indique el ancho en triángulos: ");
         ancho = s.nextInt();
         System.out.println("Indique el alto en triángulos: ");
         alto = s.nextInt();
         s.close();  
-        //alto se corresponde con filas y ancho con columnas
-
-        char rectangulo [] [] = new char [alto][ancho];
-        
-        //pintar piramide
-        
-        for (int i = 0; i < 4; i++) {
-            triangulo [i] [4] = '*';
-        }
-        for (int j = 0; j < 4; j++) {
-          triangulo [4][j] = '*';
-        }
        
+        for (int i = 0; i < alto*4; i++) {
 
+          //para resetear los contadores cuando llega a 0 espacios y 4 asteriscos
+              if (i%4 == 0) {
+                numespacios = 3;
+                numasteriscos = 1;
+                System.out.println();
+              }
 
-        //rellenar array
-        for (int i = 0; i < alto; i++) {
-            for (int j = 0; j < ancho; j++){
-            rectangulo [i] [j] = triangulo [i] [j];
+            //pintar el numespacios de la vuelta , los asteriscos y otro espacio mas
+            // en la primera vuelta se pinta 3 espacios 1 asterisco y 1 espacio detras
+
+          for (int j = 0; j < ancho; j++) {
+
+            for (int k = 0; k < numespacios ; k++) {
+                System.out.print(" ");
             }
-        }
-
-
-
-
-            //mostrar array
-          for (int i = 0; i < alto; i++) {
-            for (int j = 0; j < ancho; j++)
-            System.out.printf("%3d ", rectangulo[i][j]);
-            System.out.println();
+            for (int k = 0; k < numasteriscos ; k++) {
+              System.out.print(caracter);
+            }
+            //espacio entre piramides
+            System.out.print(" ");
           }
-      
-         
+          numespacios--;
+          numasteriscos++;
+          //linea vacia
+          System.out.println();
+        }
     }
 }

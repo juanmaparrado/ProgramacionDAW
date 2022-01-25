@@ -5,12 +5,12 @@ public class Ejercicio41{
         
         Scanner sc = new Scanner(System.in);
         
-        int num, numRev = 0, aux, contadorPar = 0, contadorImpar = 0;
+        int num = 0, numRev = 0, aux = 0 , contadorPar = 0, contadorImpar = 0;
         int longitud = 0;
         
         System.out.println("Introduce un número");
         num = sc.nextInt();
-         
+         sc.close();
         while (num > 0) {
             numRev = (numRev * 10) + (num % 10);
             num /= 10;
@@ -19,7 +19,7 @@ public class Ejercicio41{
         
         for (int i = 0; i < longitud; i++) {
             
-            aux = numRev%10;
+                aux = numRev%10;
             
             if (numRev%2 == 0) {
                 contadorPar++;

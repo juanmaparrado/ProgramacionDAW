@@ -11,7 +11,7 @@ public class Ejercicio69{
         System.out.println("Introduce la altura de la pirámide");
         altura = sc.nextInt();
         
-        
+        sc.close();
         
         for (int i = 1; i <= altura; i++) {
             

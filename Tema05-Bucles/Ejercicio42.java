@@ -10,7 +10,7 @@ public class Ejercicio42{
         
         System.out.println("Introduce un número");
         num = sc.nextInt();
-        
+        sc.close();
         for (int i = 0; i < 5; i++) {
             
             for (int j = 2; j < num/2; j++) {

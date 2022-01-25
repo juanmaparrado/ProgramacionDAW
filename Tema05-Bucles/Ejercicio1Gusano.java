@@ -47,5 +47,6 @@ public class Ejercicio1Gusano {
 
                     
         } while (movimiento != 's');
+        s.close();
     }
 }

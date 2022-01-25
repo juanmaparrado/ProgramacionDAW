@@ -23,5 +23,6 @@ public class Ejercicio39{
             factorial = 1;
             
         }
+        sc.close();
     }
 }

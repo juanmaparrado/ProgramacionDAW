@@ -44,5 +44,6 @@ public class Ejercicio38{
         else{
             System.out.println("Error");
         }
+        sc.close();
     }    
 }

@@ -6,7 +6,6 @@ public class Ejercicio3numerosExamen {
 
         int numIntroducido;
         int numero;
-        int desplazado ;
         String desplazamiento;
         int longitud = 0 ;
         int cifras = 0 ;

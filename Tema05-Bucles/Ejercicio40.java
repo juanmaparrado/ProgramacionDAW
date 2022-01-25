@@ -9,6 +9,7 @@ public class Ejercicio40{
 
         System.out.println("Introduzca la altura");
         altura = sc.nextInt();
+        sc.close();
 
         if (altura < 3 || altura%2 == 0) {
             System.out.println("Error");

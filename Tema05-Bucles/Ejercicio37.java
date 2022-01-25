@@ -10,7 +10,7 @@ public class Ejercicio37{
         
         System.out.println("Introduce un número");
         num = sc.nextInt();
-         
+         sc.close();
         while (num > 0) {
             numRev = (numRev * 10) + (num % 10);
             num /= 10;
@@ -30,5 +30,6 @@ public class Ejercicio37{
             
             numRev /= 10;
         }
+        
     }
 }

@@ -9,7 +9,7 @@ public class Ejercicio47{
         
         System.out.println("Introduce la altura");
         altura = sc.nextInt();
-        
+        sc.close();
         if (altura >= 5 && altura%2 != 0) {
             altura -= 3;
             altura /= 2;

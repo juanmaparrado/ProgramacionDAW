@@ -3,7 +3,7 @@ public class piramide {
         char c = '*';
          int h = 1;
         int numEspacios = h-1;
-         int caracter = 1;
+        
 
          for (int i = 0; i < h; i++) {
          

@@ -12,7 +12,7 @@ public class Ejercicio46{
         
         System.out.println("Introduce la altura");
         altura = sc.nextInt();
-        
+        sc.close();
         if (anchura >= 2 && altura >= 2) {
             for (int i = 0; i < anchura; i++) {
                 System.out.print("* ");

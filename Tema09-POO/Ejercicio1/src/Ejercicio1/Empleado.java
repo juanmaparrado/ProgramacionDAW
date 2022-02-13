@@ -1,6 +1,6 @@
 package Ejercicio1;
 
-public class Empleado {
+public class Empleado implements Trabajadores {
 
     //ATRIBUTOS
     private int id ;
@@ -41,5 +41,10 @@ public class Empleado {
 
         double aumento = sueldo*porcentaje/100;
         sueldo += aumento;
+    }
+
+    public double establecerBonus(double dinero) {
+
+        return Trabajadores.bonusBase+dinero;
     }
 }

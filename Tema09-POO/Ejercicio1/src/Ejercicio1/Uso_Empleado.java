@@ -18,8 +18,7 @@ public class Uso_Empleado {
         //casting
         Jefatura jefaFinanzas = (Jefatura) misEmpleados[5];
         jefaFinanzas.establecerIncentivo(5000);
-       
-
+        System.out.println(jefaFinanzas.tomarDecisiones("Dar mas días de vacaciones a los empleados"));
        
         //bucle para subir el sueldo a cada empleado
 

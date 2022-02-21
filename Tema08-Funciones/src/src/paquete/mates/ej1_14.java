@@ -1,4 +1,4 @@
-package paquete;
+
 
 public class ej1_14 {
 

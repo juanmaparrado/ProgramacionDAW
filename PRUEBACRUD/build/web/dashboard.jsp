@@ -134,10 +134,12 @@
       
         <!-- barra lateral -->
 
-        <div class="bg-white" id="sidebar-wrapper">
+        <% 
+          /*<div class="bg-white" id="sidebar-wrapper">
             <div class="sidebar-heading text-center py-4 primary-text fs-3 pe-3 fw-bold text-uppercase border-bottom"><i
-                    class="bx bx-meteor me-2"></i>JuanmaParrado</div>
-            <div class="list-group list-group-flush my-3">
+                    class="bx bx-meteor me-2"></i>JuanmaParrado
+            </div>
+             <div class="list-group list-group-flush my-3">
 
                 <a href="" class="list-group-item list-group-item-action bg-transparent second-text active"><i
                         class="bx bx-tachometer fs-4 me-2"></i>Dashboard</a>
@@ -152,8 +154,10 @@
                 <a href="" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="bx bx-paper-plane me-2"></i>Pedidos</a>
 
-            </div>
-      </div>
+              </div>
+        
+         </div>*/
+                                %>
 
          
            <%
@@ -163,12 +167,12 @@
       Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/tiendamoviles","admin","admin");
       Statement s = conexion.createStatement();
       Statement u = conexion.createStatement();
-      Statement p = conexion.createStatement();
+     
            
       request.setCharacterEncoding("UTF-8");
       ResultSet clientes = s.executeQuery ("SELECT * FROM cliente");
       ResultSet productos = u.executeQuery ("SELECT * FROM producto");
-      ResultSet pedidos = p.executeQuery ("SELECT * FROM pedidos");
+      
       
     %>
 
@@ -198,7 +202,7 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#">Profile</a></li>
                                 <li><a class="dropdown-item" href="#">Settings</a></li>
-                                <li><a class="dropdown-item" href="#" onclick="confirm('Estás seguro de que quieres SALIR?')">Logout</a></li>
+                                <li><a class="dropdown-item" href="index.jsp" onclick="confirm('Estás seguro de que quieres SALIR?')">Logout</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -235,20 +239,70 @@
                                     <td><%=clientes.getString("ApeCli") %></td>
                                     <td><%=clientes.getString("DNI") %></td>
                                     <td><%=clientes.getString("email") %></td>
-                                    <td><a href="./update.html" target="_blank"><i class='bx bxs-edit-alt fs-3 text-success'></i></a></td>
-                                    <td><i class="bx bxs-trash text-danger fs-3" onclick="confirm('Estás seguro de que quieres BORRAR este producto?')"></i></td>
+                                    
+                                    <!-- MODIFICAR CLIENTE -->
+                                    <td>
+                                      <form action="modificaCliente.jsp">      
+                                          <input type="hidden" name="clienteID" value="<%=clientes.getString("clienteID") %>">
+                                          <input type="hidden" name="NomCli" value="<%=clientes.getString("NomCli") %>">
+                                          <input type="hidden" name="ApeCli" value="<%=clientes.getString("ApeCli") %>">
+                                          <input type="hidden" name="DNI" value="<%=clientes.getString("DNI") %>">
+                                          <input type="hidden" name="email" value="<%=clientes.getString("email") %>">
+                                      
+                                        <button type="submit" class = "btn"><span class='bx bxs-edit-alt fs-3 text-success'></span></button>
+                                      
+                                      </form>
+                                    </td>
+                                    
+                                    <td>
+                                      <form method="get" action="borraCliente.jsp">
+                                        
+                                        <input type="hidden" name="clienteID" value="<%= clientes.getString("clienteID")%>"/>
+                                        <button type="submit" class="btn "><span class="bx bxs-trash text-danger  fs-3"></span></button>
+                                        
+                                       </form>
+                                    </td>
 
                                 </tr>
+                           
                                 
-                               <% } %>
+                               <% } 
+                              
+                               %>
+                               
+                                <tr>
+                                    <th scope="col" width="50">Nombre</th>
+                                    <th scope="col">Apellidos</th>
+                                    <th scope="col">DNI</th>
+                                    <th scope="col">E-mail</th> 
+                                    <th scope="col">Password</th> 
+                                </tr>
+                               <tr>
+                                  <div>
+                                    <form method="get" action="nuevoCliente.jsp">
+                                 
+                                        <tr><td><input type="text" name="NomCli" ></td>
+                                          <td><input type="text" name="ApeCli" ></td>
+                                          <td><input type="text" name="DNI" size="9" ></td>
+                                          <td><input type="text" name="email"></td>
+                                          <td><input type="text" name="pass"  ></td></tr>
+                                 
+                                        <td><button type="submit" class="btn btn-success"  >NUEVO cliente</button></td>
+                                      </form>
+                                    </div>
+                                </tr>
                                
                             </tbody>
                         </table>
                     </div>
                 </div>
-        <button type="button" class="btn btn-success" 
-        data-bs-toggle="modal" data-bs-target="#formularioProducto">NUEVO CLIENTE</button>
-            
+                               
+                            
+                             
+                            
+                            
+                    
+
             </div>
             <!-- BOTON Nuevo PEDIDO-->
        
@@ -275,38 +329,72 @@
                                 while(productos.next()){
                                 
                               %>
+                              
                                 <tr>
                                   <th scope="row"><%=productos.getString("productoID") %> </th>
                                     <td><%=productos.getString("proveedor") %></td>
                                     <td><%=productos.getString("NomProd") %></td>
                                     <td><%=productos.getString("precio") %></td>
                                     <td><%=productos.getString("cantPro") %></td>
-                                    <td><a href="./update.html" target="_blank"><i class='bx bxs-edit-alt fs-3 text-success'></i></a></td>
-                                    <td><i class="bx bxs-trash text-danger fs-3" onclick="confirm('Estás seguro de que quieres BORRAR este producto?')"></i></td>
+                                     <td>
+                                        <form action="modificaProducto.jsp">      
+                                            <input type="hidden" name="productoID" value="<%=productos.getString("productoID") %>">
+                                            <input type="hidden" name="proveedor" value="<%=productos.getString("proveedor") %>">
+                                            <input type="hidden" name="NomProd" value="<%=productos.getString("NomProd") %>">
+                                            <input type="hidden" name="precio" value="<%=productos.getString("precio") %>">
+                                            <input type="hidden" name="cantPro" value="<%=productos.getString("cantPro") %>">
 
-                                </tr>
+                                          <button type="submit" class = "btn "><span class='bx bxs-edit-alt fs-3 text-success'></span></button>
+
+                                        </form>
+                                    </td>
+                                    <td>
+                               
+                                      <form method="get" action="borraCliente.jsp">
+                                        
+                                        <input type="hidden" name="productoID" value="<%= productos.getString("productoID")%>"/>
+                                        <button type="submit" class="btn "><span class="bx bxs-trash text-danger  fs-3"></span></button>
+                                        
+                                       </form>
+                                      
+                                    </tr>
+                                    
+
+                           
                                 
                                <% } %>
+                               
                                
                             </tbody>
                         </table>
                     </div>
                 </div>
-        <button type="button" class="btn btn-success" 
-        data-bs-toggle="modal" data-bs-target="#formularioProducto">NUEVO producto</button>
+                               <table class="table bg-white rounded shadow-sm  table-hover">
+                                  <tr>
+                                    <th scope="col" width="50">Proveedor</th>
+                                    <th scope="col">Modelo</th>
+                                    <th scope="col">Precio</th>
+                                    <th scope="col">Stock</th> 
+                                </tr>
+                                <tr>
+                                  <div>
+                                    <form method="get" action="nuevoProducto.jsp" >
+                                 
+                                        <tr><td><input type="text" name="proveedor" ></td>
+                                          <td><input type="text" name="NomProd" ></td>
+                                          <td><input type="text" name="precio"></td>
+                                          <td><input type="text" name="cantPro"></td></tr>
+                                 
+                                        <td><button type="submit" class="btn btn-success"  >NUEVO Producto</button></td>
+                                      </form>
+                                    </div>
+                                </tr>
+                               </table>
+                               
             
             </div> 
                                
-              
-                               
-                               
 
-                               
-            
-            
-            
-            
-            
         
         </div>
     </div>

@@ -23,20 +23,19 @@
       
        request.setCharacterEncoding("UTF-8");
        
-       String consultaemail = "SELECT * FROM cliente WHERE email='"
-                                + request.getParameter("email")+"'"; 
+       String consultamodelo = "SELECT * FROM producto WHERE NomProd='"
+                                + request.getParameter("NomProd")+"'"; 
        
-       ResultSet email = s.executeQuery(consultaemail);
+       ResultSet modelo = s.executeQuery(consultamodelo);
        
-       if (email.getRow() != 0) {
+       if (modelo.getRow() != 0) {
         out.println("No se ha podido dar de alta, ya existe una registro con el email " + request.getParameter("email") );
        }else{
-          String insert = "INSERT INTO cliente (NomCli, ApeCli, DNI, email , pass) VALUES ('"
-                  +request.getParameter("NomCli")+"','"
-                  +request.getParameter("ApeCli")+"','"
-                  +request.getParameter("DNI")+"','"
-                  +request.getParameter("email")+"','"
-                  +request.getParameter("pass")+"')";
+          String insert = "INSERT INTO producto (proveedor, NomProd, precio, cantPro) VALUES ('"
+                  +request.getParameter("proveedor")+"','"
+                  +request.getParameter("NomProd")+"','"
+                  +Integer.valueOf(request.getParameter("precio"))+"','"
+                  +Integer.valueOf(request.getParameter("cantPro"))+"')";
           s.execute(insert);
           response.sendRedirect("dashboard.jsp");
        }

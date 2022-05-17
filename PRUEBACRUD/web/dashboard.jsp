@@ -131,34 +131,6 @@
   
  
     <div class="d-flex" id="wrapper">
-      
-        <!-- barra lateral -->
-
-        <% 
-          /*<div class="bg-white" id="sidebar-wrapper">
-            <div class="sidebar-heading text-center py-4 primary-text fs-3 pe-3 fw-bold text-uppercase border-bottom"><i
-                    class="bx bx-meteor me-2"></i>JuanmaParrado
-            </div>
-             <div class="list-group list-group-flush my-3">
-
-                <a href="" class="list-group-item list-group-item-action bg-transparent second-text active"><i
-                        class="bx bx-tachometer fs-4 me-2"></i>Dashboard</a>
-
-                        <!--
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="bx bx-network-chart me-2"></i>Productos</a>
-                        -->
-                <a href="" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="bx bx-package me-2"></i>Productos</a>
-
-                <a href="" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
-                        class="bx bx-paper-plane me-2"></i>Pedidos</a>
-
-              </div>
-        
-         </div>*/
-                                %>
-
          
            <%
        /*conexion base de datos*/
@@ -167,11 +139,13 @@
       Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/tiendamoviles","admin","admin");
       Statement s = conexion.createStatement();
       Statement u = conexion.createStatement();
+       Statement p = conexion.createStatement();
      
            
       request.setCharacterEncoding("UTF-8");
       ResultSet clientes = s.executeQuery ("SELECT * FROM cliente");
       ResultSet productos = u.executeQuery ("SELECT * FROM producto");
+      ResultSet pedido = p.executeQuery ("SELECT * FROM pedidos");
       
       
     %>
@@ -223,7 +197,10 @@
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Apellidos</th>
                                     <th scope="col">DNI</th> 
-                                    <th scope="col">E-mail</th> 
+                                    <th scope="col">E-mail</th>
+                                    <th scope="col">Password</th>
+                                    
+                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -239,6 +216,8 @@
                                     <td><%=clientes.getString("ApeCli") %></td>
                                     <td><%=clientes.getString("DNI") %></td>
                                     <td><%=clientes.getString("email") %></td>
+                                    <td><%=clientes.getString("pass") %></td>
+                                 
                                     
                                     <!-- MODIFICAR CLIENTE -->
                                     <td>
@@ -248,8 +227,10 @@
                                           <input type="hidden" name="ApeCli" value="<%=clientes.getString("ApeCli") %>">
                                           <input type="hidden" name="DNI" value="<%=clientes.getString("DNI") %>">
                                           <input type="hidden" name="email" value="<%=clientes.getString("email") %>">
+                                          <input type="hidden" name="pass" value="<%=clientes.getString("pass") %>">
+                                          
                                       
-                                        <button type="submit" class = "btn"><span class='bx bxs-edit-alt fs-3 text-success'></span></button>
+                                          <button type="submit" class = "bx bxs-edit-alt fs-3 text-success" ></button>
                                       
                                       </form>
                                     </td>
@@ -304,7 +285,7 @@
                     
 
             </div>
-            <!-- BOTON Nuevo PEDIDO-->
+      
        
             <!-- TABLA PRODUCTOS -->
            <div class="container-fluid px-5">
@@ -350,7 +331,7 @@
                                     </td>
                                     <td>
                                
-                                      <form method="get" action="borraCliente.jsp">
+                                      <form method="get" action="borraProducto.jsp">
                                         
                                         <input type="hidden" name="productoID" value="<%= productos.getString("productoID")%>"/>
                                         <button type="submit" class="btn "><span class="bx bxs-trash text-danger  fs-3"></span></button>
@@ -394,8 +375,101 @@
             
             </div> 
                                
+              <!-- TABLA pedidos -->
+                       <div class="container-fluid px-5">
+              
+                <div class="row my-5">
+                    <h3 class="fs-4 mb-3">Pedidos</h3>
+                    <div class="col">
+                        <table class="table bg-white rounded shadow-sm  table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col" width="50">#</th>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Metodo Pago</th>
+                                    <th scope="col">ClienteID</th> 
+                                     
+                                </tr>
+                            </thead>
+                            <tbody>
+                              
+                              <% 
+                                
+                                while(pedido.next()){
+                                
+                              %>
+                                <tr>
+                                  <th scope="row"><%=pedido.getString("pedidoID") %> </th>
+                                    <td><%=pedido.getString("fechaPed") %></td>
+                                    <td><%=pedido.getString("metodoPago") %></td>
+                                    <td><%=pedido.getString("clienteID") %></td>
+                                    
+                                    
+                                    
+                                    <td>
+                                      <form action="modificaPedido.jsp">      
+                                          <input type="hidden" name="pedidoID" value="<%=pedido.getString("pedidoID") %>">
+                                          <input type="hidden" name="fechaPed" value="<%=pedido.getString("fechaPed") %>">
+                                          <input type="hidden" name="metodoPago" value="<%=pedido.getString("metodoPago") %>">
+                                          <input type="hidden" name="clienteID" value="<%=pedido.getString("clienteID") %>">
+                                          
+                                      
+                                        <button type="submit" class = "btn"><span class='bx bxs-edit-alt fs-3 text-success'></span></button>
+                                      
+                                      </form>
+                                    </td>
+                                    
+                                    <td>
+                                      <form method="get" action="borraPedido.jsp">
+                                        
+                                        <input type="hidden" name="clienteID" value="<%= pedido.getString("pedidoID")%>"/>
+                                        <button type="submit" class="btn "><span class="bx bxs-trash text-danger  fs-3"></span></button>
+                                        
+                                       </form>
+                                    </td>
 
+                                </tr>
+                           
+                                
+                               <% } 
+                              
+                               %>
+                               
+                                <tr>
+                                    <th scope="col" >Fecha</th>
+                                    <th scope="col">Metodo Pago</th>
+                                    <th scope="col">ClienteID</th>
+                                    
+                                </tr>
+                               <tr>
+                                  <div>
+                                    <form method="get" action="nuevoPedido.jsp">
+                                 
+                                        <tr><td><input type="text" name="fechaPed" ></td>
+                                          <td><input type="text" name="metodoPago" ></td>
+                                          <td><input type="text" name="clienteID" ></td></tr>
+                                 
+                                        <td><button type="submit" class="btn btn-success"  >NUEVO pedido</button></td>
+                                      </form>
+                                    </div>
+                                </tr>
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                               
+                            
+                             
+                            
+                            
+                    
+
+            </div>   
         
+                               
+                               
+                               
         </div>
     </div>
    

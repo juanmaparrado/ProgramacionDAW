@@ -23,20 +23,10 @@
       
        request.setCharacterEncoding("UTF-8");
        
-       String consultaemail = "SELECT * FROM cliente WHERE email='"
-                                + request.getParameter("email")+"'"; 
-       
-       ResultSet email = s.executeQuery(consultaemail);
-       
-       if (email.getRow() != 0) {
-        out.println("No se ha podido dar de alta, ya existe una registro con el email " + request.getParameter("email") );
-       }else{
-          String insert = "INSERT INTO cliente (NomCli, ApeCli, DNI, email , pass) VALUES ('"
-                  +request.getParameter("NomCli")+"','"
-                  +request.getParameter("ApeCli")+"','"
-                  +request.getParameter("DNI")+"','"
-                  +request.getParameter("email")+"','"
-                  +request.getParameter("pass")+"')";
+          String insert = "INSERT INTO pedidos (fechaPed, metodoPago, clienteID) VALUES ('"
+                  +request.getParameter("fechaPed")+"','"
+                  +request.getParameter("metodoPago")+"','"
+                  +request.getParameter("clienteID")+"')";
           s.execute(insert);
           response.sendRedirect("dashboard.jsp");
        }

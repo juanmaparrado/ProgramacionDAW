@@ -10,7 +10,7 @@ public class PinaLetra {
 
         Scanner s = new Scanner(System.in);
         System.out.println("Introduce el pin: ");
-        pin = s.nextInt();
+        pin = s.next().charAt(0);
 
         if (pin == 0) {
             resultado = "cero";

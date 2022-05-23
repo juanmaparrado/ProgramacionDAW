@@ -9,16 +9,20 @@ public class cuentadigito {
         System.out.println("Introduzca un numero entero ");
         numero = s.nextLong();
         s.close();
-
+        //rellena las diez posiciones
+        
         for (int i = 0; i < 10; i++) {
             digitos[i] = 0 ;
         }
+        //establece en la posicion del array el numro de veces que aparece
         do {
             int cifra = (int) numero % 10 ;
             digitos[cifra]++ ;
             numero /= 10 ;
 
         } while (numero>0);
+
+        //muestra por pantalla
 
         for (int i = 0; i < 10; i++) {
             if (digitos[i] > 0) {

@@ -11,19 +11,19 @@ public class rectangulopiramides {
 
                 for (int j=1; j<=4; j++) {
 
-                  for (int k=0; k<ancho; k++) {
-                    //tramo blancos
-                    for (int l=1;l<=4-j;l++) {
+                    for (int k=0; k<ancho; k++) {
+                      //tramo blancos
+                      for (int l=1;l<=4-j;l++) {
+                        System.out.print(" ");
+                      }
+                      //tramo asteriscos
+                      for (int l=1; l<=j; l++) {
+                        System.out.print("*");
+                      }
+                      // espacio en blanco
                       System.out.print(" ");
-                    }
-                    //tramo asteriscos
-                    for (int l=1; l<=j; l++) {
-                      System.out.print("*");
-                    }
-                    // espacio en blanco
-                    System.out.print(" ");
-                  }        
-                  System.out.println();
+                    }        
+                    System.out.println();
                 }
                 System.out.println();
               }

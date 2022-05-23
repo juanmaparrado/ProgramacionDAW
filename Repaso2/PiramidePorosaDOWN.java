@@ -6,39 +6,43 @@ public class PiramidePorosaDOWN {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
 
-        int altura=0;
-        int espacios=0;
+        int h=0;
+      int espacios = 0;
         char c = '*';
 
 
 
         System.out.println("INTRODUCE LA ALTURA DE LA PIRAMIDE");
-        altura = s.nextInt();
+        h = s.nextInt();
 
         System.out.println("INTRODUCE EL CARACTER DE LA PIRAMIDE");
         c = s.next().charAt(0);
 
         s.close();
-        int caracter = altura-1;
+        int caracter = h-1;
 
         
         System.out.println();
 
-        for (int i = 0; i < altura; i++) {
-            
-            System.out.print(c);
-            for (int j = 0; j < i; j++) {
-                System.out.print(c);
-            }
-            for (int j = 0; j > caracter; j++) {
+
+        for (int i = 0; i < h; i++) {
+           /*numero de vueltas es decir de pisos */ 
+           
+            //pintar espacios 
+            for (int j = 0; j < espacios; j++) {
                 System.out.print(" ");
             }
-            
+            //mitad piramide
+            System.out.print(c);
 
+            //pintar caracteres
+            for (int j = 0; j < caracter; j++) {
+                System.out.print(" "+c);
+            }
 
-            espacios++;
-            
             System.out.println();
+            espacios++;
+            caracter--;
         }
 
 

@@ -1,6 +1,6 @@
 public class AdivinaPalabra {
     public static void main (String[] args) {
-      String[] listaPalabras = {"hola","prueba","patata","programacion","desarrollo"};
+      String[] listaPalabras = {"hola","leon","patata","programacion","desarrollo"};
       String elegida,desordenada;
       int intentos;
       String juego;

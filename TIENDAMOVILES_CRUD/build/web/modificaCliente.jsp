@@ -44,7 +44,7 @@
        </tr>
       <tr>
         <div>
-            <form class="login-form text-start" action="updateCliente.jsp">      
+            <form class="login-form text-start" action="modificaCliente.jsp">      
               <tr><td><input type="text" name="clienteID" value="<%=request.getParameter("clienteID") %>"></td>
               <td><input type="text" name="NomCli" value="<%=request.getParameter("NomCli") %>"></td>
               <td><input type="text" name="ApeCli" value="<%=request.getParameter("ApeCli") %>"></td>
@@ -63,7 +63,29 @@
       </tr>      
         </table>
                     </div>
-              </
+               <%
+         
+         request.setCharacterEncoding("UTF-8");
+        
+
+
+      Class.forName("com.mysql.jdbc.Driver");
+      Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/tiendamoviles","admin","admin");
+      Statement s = conexion.createStatement();
+      
+            String update = "UPDATE cliente SET "
+                           + "NomCli='" + request.getParameter("NomCli")
+                           + "', ApeCli='" + (request.getParameter("ApeCli"))
+                           + "',  DNI='" + request.getParameter("DNI")
+                           + "' , email='" + request.getParameter("email")
+                           + "' WHERE clienteID=" + Integer.valueOf(request.getParameter("clienteID"));
+            
+            s.execute(update);
+            response.sendRedirect("dashboard.jsp");
+    
+    
+    
+    %>
     
     
   </body>

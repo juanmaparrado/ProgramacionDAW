@@ -37,14 +37,6 @@
 
                 <div class="col-lg-6 px-5 pt-5">
                   
-                  <%request.setCharacterEncoding("UTF-8");%>
-                  <%
-                 Class.forName("com.mysql.jdbc.Driver");
-                    Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/tiendamoviles","admin","admin");
-                    Statement st = conexion.createStatement();
-                    
-    
-                    %>
                    
                     <form action="login.jsp" method="post" >
                         <h1 class="py-3 ">ALMACEN TEMPHOUSE</h1>

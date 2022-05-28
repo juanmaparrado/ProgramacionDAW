@@ -83,7 +83,7 @@ public class matrizbidimensional {
         }
 
         
-
+s.close();
 
     }
 }

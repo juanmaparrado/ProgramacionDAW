@@ -1,4 +1,5 @@
 
+<%@page import="conexion.ConexionBBDD"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.Connection"%>
@@ -43,7 +44,7 @@
        </tr>
       <tr>
         <div>
-            <form class="login-form text-start" action="updateProducto.jsp">      
+            <form class="login-form text-start" action="modificaPedido.jsp">      
               <tr><td><input type="text" name="pedidoID" value="<%=request.getParameter("pedidoID") %>"></td>
               <td><input type="text" name="fechaPed" value="<%=request.getParameter("fechaPed") %>"></td>
               <td><input type="text" name="metodoPago" value="<%=request.getParameter("metodoPago") %>"></td>
@@ -60,7 +61,26 @@
       </tr>      
         </table>
                     </div>
-              </
+              <%
+         
+         request.setCharacterEncoding("UTF-8");
+        
+          ConexionBBDD s = new ConexionBBDD();
+
+
+      
+            String update = "UPDATE pedidos SET "
+                           + "fechaPed='" + request.getParameter("fechaPed")
+                           + "', metodoPago='" + (request.getParameter("metodoPago"))
+                           + "',  clienteID='" + Integer.valueOf(request.getParameter("clienteID"))
+                           + "' WHERE pedidoID=" + Integer.valueOf(request.getParameter("pedidoID"));
+            
+            s.ejecutaSQL(update);
+           
+          
+    
+    
+    %>
     
     
   </body>

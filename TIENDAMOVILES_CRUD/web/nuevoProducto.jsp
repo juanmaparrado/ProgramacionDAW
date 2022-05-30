@@ -4,6 +4,7 @@
     Author     : usuario
 --%>
 
+<%@page import="conexion.ConexionBBDD"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Statement"%>
@@ -17,16 +18,14 @@
   </head>
   <body>
       <%
-	  Class.forName("com.mysql.jdbc.Driver");
-      Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/tiendamoviles","admin","admin");
-      Statement s = conexion.createStatement();
-      
+	  
        request.setCharacterEncoding("UTF-8");
+       ConexionBBDD s = new ConexionBBDD();
        
        String consultamodelo = "SELECT * FROM producto WHERE NomProd='"
                                 + request.getParameter("NomProd")+"'"; 
        
-       ResultSet modelo = s.executeQuery(consultamodelo);
+       ResultSet modelo = s.consultaDatos(consultamodelo);
        
        if (modelo.getRow() != 0) {
         out.println("No se ha podido dar de alta, ya existe una registro con el email " + request.getParameter("email") );
@@ -36,7 +35,7 @@
                   +request.getParameter("NomProd")+"','"
                   +Integer.valueOf(request.getParameter("precio"))+"','"
                   +Integer.valueOf(request.getParameter("cantPro"))+"')";
-          s.execute(insert);
+          s.ejecutaSQL(insert);
           response.sendRedirect("dashboard.jsp");
        }
       

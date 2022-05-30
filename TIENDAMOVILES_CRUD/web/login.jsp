@@ -17,13 +17,13 @@
   </head>
   <body>
     <%
-                   Class.forName("com.mysql.jdbc.Driver");
+              
+                    Class.forName("com.mysql.jdbc.Driver");
                     Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/tiendamoviles","admin","admin");
                     Statement st = conexion.createStatement();
-
-                    request.setCharacterEncoding("UTF-8");
-      
-      String consulta = "SELECT COUNT(*) FROM cliente WHERE email='"
+                    request.setCharacterEncoding("UTF-8");     
+                    
+                    String consulta = "SELECT COUNT(*) FROM cliente WHERE email='"
               +request.getParameter("email")
               +"'AND pass='"
               +request.getParameter("pass")
@@ -32,13 +32,11 @@
       ResultSet rs = st.executeQuery(consulta);
       rs.next();
       
-
       if (rs.getInt(1) == 0){
         out.println("accesso denegado");
       }else {
         response.sendRedirect("dashboard.jsp");
       }
-                   
            %>
   </body>
 </html>

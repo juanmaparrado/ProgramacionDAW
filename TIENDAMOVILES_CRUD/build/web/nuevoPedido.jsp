@@ -4,6 +4,7 @@
     Author     : usuario
 --%>
 
+<%@page import="conexion.ConexionBBDD"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Statement"%>
@@ -17,9 +18,7 @@
   </head>
   <body>
       <%
-	  Class.forName("com.mysql.jdbc.Driver");
-      Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/tiendamoviles","admin","admin");
-      Statement s = conexion.createStatement();
+	  ConexionBBDD s = new ConexionBBDD();
       
        request.setCharacterEncoding("UTF-8");
        
@@ -27,7 +26,7 @@
                   +request.getParameter("fechaPed")+"','"
                   +request.getParameter("metodoPago")+"','"
                   +request.getParameter("clienteID")+"')";
-          s.execute(insert);
+          s.ejecutaSQL(insert);
           response.sendRedirect("dashboard.jsp");
        }
       

@@ -1,5 +1,6 @@
 
 
+<%@page import="conexion.ConexionBBDD"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
@@ -12,13 +13,11 @@
   </head>
   <body>
     <%
-	  Class.forName("com.mysql.jdbc.Driver");
-      Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/tiendamoviles","admin","admin");
-      Statement s = conexion.createStatement();
-      
+	  ConexionBBDD s = new ConexionBBDD();
+    
       String delete = "DELETE FROM cliente WHERE clienteID = '"
                                     + request.getParameter("clienteID")+"'";
-      s.execute(delete);
+      s.ejecutaSQL(delete);
       response.sendRedirect("dashboard.jsp");
       
       %>

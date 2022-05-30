@@ -1,15 +1,14 @@
-<%-- 
-    Document   : login
-    Created on : 15-may-2022, 21:05:49
-    Author     : usuario
---%>
 
+
+<%@page import="conexion.ConexionBBDD"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+
+
+
 <html lang="en">
     
 <head>
@@ -29,7 +28,41 @@
 
 
 <body id="bg-secondary">
-        <div id="wrapper" class="container bg-light p-5">
+  <%
+
+                         if ("logout".equals(request.getParameter("accion"))) {
+                           
+                           session.invalidate();
+                           session = request.getSession();
+                         }
+
+                         String email = (String)session.getAttribute("email");
+                         if (email==null) {
+                           email = request.getParameter("email");
+
+                           if (email!=null) {
+                             request.setCharacterEncoding("UTF-8");
+                             ConexionBBDD s = new ConexionBBDD();
+
+                             String consulta="SELECT * FROM cliente WHERE email='";
+                             consulta += email+"' AND pass='";
+                             consulta += request.getParameter("pass")+"'";
+
+                             ResultSet consultaLogin = s.consultaDatos(consulta);
+
+                             if (consultaLogin.next()){
+                               session.setAttribute("email",email);
+                               response.sendRedirect("dashboard.jsp");
+                             } else {
+                               email=null;
+                             }
+                           }
+                         }
+
+                         if (email==null) {
+                          
+                           %>
+  <div id="wrapper" class="container bg-light p-5">
             <div class="row no-glutters">
                 <div class="col-lg-5 p-0">
                     <img src="./login.jpg" class="img-fluid" alt="">
@@ -37,18 +70,12 @@
 
                 <div class="col-lg-6 px-5 pt-5">
                   
-                  <%request.setCharacterEncoding("UTF-8");%>
-                  <%
-                 Class.forName("com.mysql.jdbc.Driver");
-                    Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/tiendamoviles","admin","admin");
-                    Statement st = conexion.createStatement();
-                    
-    
-                    %>
+                  
+                  
                    
-                    <form action="login.jsp" method="post" >
+                    <form action="#" method="post" >
                         <h1 class="py-3 ">ALMACEN TEMPHOUSE</h1>
-                        <h6>Inicie sesion</h6>
+                       <!-- <h6>Inicie sesion</h6> -->
                         <div class="form-floating mb-3">
                             <div class="col-lg-6">
                                 <input type="text" id="email" name="email" placeholder="alguien@example.com" class="form-control my-3 p-4" >
@@ -59,15 +86,23 @@
                                 <input type="password" id="pass" name="pass" placeholder="*******" class="form-control my-3 p-4">
                             </div>
                         </div>
+                      
                         <div class="form-row">
                             <div class="col-lg-7">
-                              <input type="submit" value="LOGIN">                       
+                              <input type="submit" name="login"  value="LOGIN">                       
                             </div>
                         </div>
                     </form>
+                           
                 </div>
             </div>
         </div>
+        <%
+                                out.close();
+                                response.sendRedirect("index.jsp");
+                              }
+ 
+                        %>
   
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>

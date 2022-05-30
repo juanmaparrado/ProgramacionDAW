@@ -1,4 +1,5 @@
 
+<%@page import="conexion.ConexionBBDD"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.Connection"%>
@@ -44,7 +45,7 @@
        </tr>
       <tr>
         <div>
-            <form class="login-form text-start" action="updateCliente.jsp">      
+            <form class="login-form text-start" action="modificaCliente.jsp">      
               <tr><td><input type="text" name="clienteID" value="<%=request.getParameter("clienteID") %>"></td>
               <td><input type="text" name="NomCli" value="<%=request.getParameter("NomCli") %>"></td>
               <td><input type="text" name="ApeCli" value="<%=request.getParameter("ApeCli") %>"></td>
@@ -55,7 +56,7 @@
 
               <td> <a class="btn btn-danger" href="dashboard.jsp">Cancelar</a><td>
               
-              <td><button type="submit" class = "bx bxs-edit-alt fs-3 text-success" ></button></td>
+              <td><button type="submit" class = "bx bxs-edit-alt fs-3 text-success"  ></button></td>
               
 
              </form>
@@ -63,7 +64,26 @@
       </tr>      
         </table>
                     </div>
-              </
+               <%
+         
+         request.setCharacterEncoding("UTF-8");
+        
+
+
+      ConexionBBDD s = new ConexionBBDD();
+      
+            String update = "UPDATE cliente SET "
+                           + "NomCli='" + request.getParameter("NomCli")
+                           + "', ApeCli='" + (request.getParameter("ApeCli"))
+                           + "',  DNI='" + request.getParameter("DNI")
+                           + "' , email='" + request.getParameter("email")
+                           + "' WHERE clienteID=" + Integer.valueOf(request.getParameter("clienteID"));
+            
+            s.ejecutaSQL(update);
+           
+           
+            
+    %>
     
     
   </body>

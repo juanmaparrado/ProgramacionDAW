@@ -4,6 +4,7 @@
     Author     : usuario
 --%>
 
+<%@page import="conexion.ConexionBBDD"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Statement"%>
@@ -17,18 +18,16 @@
   </head>
   <body>
       <%
-	  Class.forName("com.mysql.jdbc.Driver");
-      Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/tiendamoviles","admin","admin");
-      Statement s = conexion.createStatement();
+	  ConexionBBDD s = new ConexionBBDD();
       
        request.setCharacterEncoding("UTF-8");
        
        String consultaemail = "SELECT * FROM cliente WHERE email='"
                                 + request.getParameter("email")+"'"; 
        
-       ResultSet email = s.executeQuery(consultaemail);
+       ResultSet listadoemail = s.consultaDatos(consultaemail);
        
-       if (email.getRow() != 0) {
+       if (listadoemail.getRow() != 0) {
         out.println("No se ha podido dar de alta, ya existe una registro con el email " + request.getParameter("email") );
        }else{
           String insert = "INSERT INTO cliente (NomCli, ApeCli, DNI, email , pass) VALUES ('"
@@ -37,7 +36,7 @@
                   +request.getParameter("DNI")+"','"
                   +request.getParameter("email")+"','"
                   +request.getParameter("pass")+"')";
-          s.execute(insert);
+          s.ejecutaSQL(insert);
           response.sendRedirect("dashboard.jsp");
        }
       

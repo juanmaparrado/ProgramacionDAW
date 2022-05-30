@@ -4,6 +4,7 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
+<%@page import="conexion.ConexionBBDD"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -132,20 +133,19 @@
  
     <div class="d-flex" id="wrapper">
          
-           <%
+           <%   
        /*conexion base de datos*/
        
-	  Class.forName("com.mysql.jdbc.Driver");
-      Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/tiendamoviles","admin","admin");
-      Statement s = conexion.createStatement();
-      Statement u = conexion.createStatement();
-       Statement p = conexion.createStatement();
-     
+     ConexionBBDD s = new ConexionBBDD();
+     ConexionBBDD u = new ConexionBBDD();
+     ConexionBBDD p = new ConexionBBDD();
            
       request.setCharacterEncoding("UTF-8");
-      ResultSet clientes = s.executeQuery ("SELECT * FROM cliente");
-      ResultSet productos = u.executeQuery ("SELECT * FROM producto");
-      ResultSet pedido = p.executeQuery ("SELECT * FROM pedidos");
+      
+      
+      ResultSet clientes = s.consultaDatos ("SELECT * FROM cliente");
+      ResultSet productos = u.consultaDatos("SELECT * FROM producto");
+      ResultSet pedido = p.consultaDatos("SELECT * FROM pedidos");
       
       
     %>
